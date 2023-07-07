@@ -2,6 +2,14 @@ import asyncErrorWrapper from "express-async-handler";
 import OrderModel from "../models/Order.js";
 import UserModel from "../models/User.js";
 
+const getAllOrders = asyncErrorWrapper(async (req, res, next) => {
+  const orders = await OrderModel.find();
+
+  return res.status(200).json({
+    orders: orders,
+  });
+});
+
 const createOrder = asyncErrorWrapper(async (req, res, next) => {
   const { user_id } = req.params;
   const { products, status, amount } = req.body;
@@ -38,4 +46,4 @@ const editOrder = asyncErrorWrapper(async (req, res, next) => {
   });
 });
 
-export { createOrder, deleteOrder, editOrder };
+export { getAllOrders, createOrder, deleteOrder, editOrder };
