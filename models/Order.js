@@ -37,4 +37,3 @@ const OrderSchema = new Schema(
 );
 
 export default mongoose.model("Order", OrderSchema);
-

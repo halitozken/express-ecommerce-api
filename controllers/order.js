@@ -29,7 +29,7 @@ const createOrder = asyncErrorWrapper(async (req, res, next) => {
 const deleteOrder = asyncErrorWrapper(async (req, res, next) => {
   const { user_id } = req.params;
   const order = await OrderModel.findByIdAndDelete(id);
-
+  console.log("delete");
   return res.status(200).json({
     success: true,
     message: "Order deleted successfully",
