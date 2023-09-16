@@ -2,48 +2,25 @@ import asyncErrorWrapper from "express-async-handler";
 import OrderModel from "../models/Order.js";
 import UserModel from "../models/User.js";
 
-const getAllOrders = asyncErrorWrapper(async (req, res, next) => {
-  const orders = await OrderModel.find();
+const getAllOrders = asyncErrorWrapper(async (req, res, next) => {});
 
-  return res.status(200).json({
-    orders: orders,
-  });
-});
-
-const createOrder = asyncErrorWrapper(async (req, res, next) => {
+const createOrder = asyncErrorWrapper(async (req, res) => {
   const { user_id } = req.params;
-  const { products, status, amount } = req.body;
+  const newOrder = req.body;
+
   const order = await OrderModel.create({
-    owner: user_id,
-    products,
-    status,
-    amount,
+    user: user_id,
+    ...newOrder,
   });
 
-  return res.status(200).json({
+  return res.status(201).json({
     success: true,
-    data: order,
+    order,
   });
 });
 
-const deleteOrder = asyncErrorWrapper(async (req, res, next) => {
-  const { user_id } = req.params;
-  const order = await OrderModel.findByIdAndDelete(id);
-  console.log("delete");
-  return res.status(200).json({
-    success: true,
-    message: "Order deleted successfully",
-  });
-});
+const deleteOrder = asyncErrorWrapper(async (req, res, next) => {});
 
-const editOrder = asyncErrorWrapper(async (req, res, next) => {
-  const { user_id } = req.params;
-  const order = await OrderModel.findByIdAndUpdate(id);
-
-  return res.status(200).json({
-    success: true,
-    data: order,
-  });
-});
+const editOrder = asyncErrorWrapper(async (req, res, next) => {});
 
 export { getAllOrders, createOrder, deleteOrder, editOrder };

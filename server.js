@@ -3,6 +3,7 @@ import { config } from "dotenv";
 import customErrorHandler from "./middlewares/errors/CustomErrorHandler.js";
 import connectDatabase from "./helpers/database/connectDatabase.js";
 import routers from "./routers/index.js";
+import cors from "cors";
 
 config({
   path: "./config/env/config.env",
@@ -11,7 +12,7 @@ config({
 connectDatabase();
 
 const app = express();
-
+app.use(cors());
 app.listen(process.env.PORT, () => {
   console.log(
     "App started on port: " + process.env.PORT + " " + process.env.NODE_ENV

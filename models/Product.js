@@ -10,28 +10,46 @@ const ProductSchema = new Schema(
       unique: true,
     },
 
-    description: {
+    desc: {
+      type: String,
+      required: true,
+    },
+
+    img: {
       type: String,
       required: true,
     },
 
     categories: {
-      type: String,
-      required: true,
+      type: Array,
     },
 
-    image: {
-      type: String,
-      required: true,
+    color: {
+      type: Array,
     },
 
     price: {
       type: String,
       required: true,
     },
+
+    size: {
+      type: Array,
+    },
+
+    price: {
+      type: Number,
+      required: true,
+    },
+
+    inStock: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );
 
 const ProductModel = mongoose.model("Product", ProductSchema);
+
 export default ProductModel;

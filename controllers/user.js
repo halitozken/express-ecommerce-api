@@ -6,12 +6,23 @@ const getAllUsers = asyncErrorWrapper(async (req, res, next) => {
 
   return res.status(200).json({
     success: true,
+    size: users.length,
     data: users,
   });
 });
 
+const getOneUser = asyncErrorWrapper(async (req, res) => {
+  const { id } = req.params;
+
+  const user = await UserModel.findById(id);
+
+  return res.status(200).json({
+    user: user,
+  });
+});
+
 const editUser = asyncErrorWrapper(async (req, res, next) => {
-  const id = req.params;
+  const { id } = req.params;
   const updateUser = await UserModel.findByIdAndUpdate(
     id,
     {
@@ -27,13 +38,11 @@ const editUser = asyncErrorWrapper(async (req, res, next) => {
 });
 
 const deleteUser = asyncErrorWrapper(async (req, res, next) => {
-  const id = req.params;
-  const user = await UserModel.findByIdAndDelete(id);
+  const { id } = req.params;
 
-  return res.status(200).json({
-    success: true,
-    message: "User deleted successfully",
-  });
+  await UserModel.findByIdAndDelete(id);
+
+  return res.status(204).json({});
 });
 
-export { getAllUsers, editUser, deleteUser };
+export { getAllUsers, editUser, deleteUser, getOneUser };

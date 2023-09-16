@@ -56,8 +56,6 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
-
-    order: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
   },
   { timestamps: true }
 );

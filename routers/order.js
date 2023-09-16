@@ -9,9 +9,8 @@ import {
 const router = express.Router({ mergeParams: true });
 
 router.get("/all", getAllOrders);
-router.post("/add", createOrder);
-router.delete("/:order_id/delete", deleteOrder);
-router.put("/:order_id/edit", editOrder);
-
+router.post("/:user_id", createOrder);
+router.delete("/:id", deleteOrder);
+router.put("/:id", editOrder);
 
 export default router;

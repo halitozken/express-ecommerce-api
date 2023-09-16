@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const OrderSchema = new Schema(
   {
-    owner: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -25,12 +25,7 @@ const OrderSchema = new Schema(
 
     status: {
       type: String,
-      required: true,
-    },
-
-    amount: {
-      type: String,
-      required: true,
+      default: "pending"
     },
   },
   { timestamps: true }
